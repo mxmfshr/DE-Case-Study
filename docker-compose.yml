@@ -41,6 +41,5 @@ services:
       - mysql_db
       - psql_db
       - main
-    command: ["python", "./analytics.py" ]
 
 

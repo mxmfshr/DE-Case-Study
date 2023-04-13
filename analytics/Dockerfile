@@ -1,7 +1,8 @@
 FROM python:3-slim
 RUN apt-get update \
-    && apt-get -y install libpq-dev gcc \
-    && pip install psycopg2 sqlalchemy
+    && apt-get -y install libpq-dev gcc cron \
+    && pip install psycopg2 pymysql sqlalchemy pandas cryptography
 WORKDIR /app
 COPY . .
-CMD [ "python", "./analytics.py" ]
+RUN crontab crontab
+CMD ["/bin/bash", "-c", "printenv > /etc/environment && cron -f"] 
